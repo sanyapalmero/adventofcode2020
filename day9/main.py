@@ -33,21 +33,18 @@ def part_1():
 
 def search_list(numbers, not_valid_number):
     searched_numbers = []
-    end = False
-    for number in numbers:
-        sum_numbers = 0
-        searched_numbers.clear()
-        while sum_numbers <= not_valid_number:
-            for number_2 in numbers:
-                searched_numbers.append(number_2)
-                sum_numbers += number_2
-                if sum_numbers == not_valid_number:
-                    return searched_numbers
-                elif sum_numbers > not_valid_number:
-                    break
+    sum_numbers = 0
+    while sum_numbers <= not_valid_number:
+        for number in numbers:
+            searched_numbers.append(number)
+            sum_numbers += number
+            if sum_numbers == not_valid_number:
+                return searched_numbers
+            elif sum_numbers > not_valid_number:
+                sum_numbers = 0
+                searched_numbers.clear()
+                break
         numbers.pop(0)
-        if end:
-            break
 
 
 def part_2():
