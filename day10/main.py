@@ -43,6 +43,19 @@ def part_1():
 def part_2():
     joltage_list = get_joltage_ratings_list()
     builtin_joltage_adapter = max(joltage_list) + BUILTIN_JOLTAGE_ADAPTER_DIFFERENCE
+
+    # Solution from https://dev.to/qviper/advent-of-code-2020-python-solution-day-10-30kd
+    sol = {0: 1}
+    for line in sorted(joltage_list):
+        sol[line] = 0
+        if line - 1 in sol.keys():
+            sol[line] += sol[line - 1]
+        if line - 2 in sol.keys():
+            sol[line] += sol[line - 2]
+        if line - 3 in sol.keys():
+            sol[line] += sol[line - 3]
+
+    print(sol[max(joltage_list)])
     
     # Solution from https://www.reddit.com/r/adventofcode/comments/ka8z8x/2020_day_10_solutions/gfdfthy?utm_source=share&utm_medium=web2x&context=3
     last_jolt = max(joltage_list)
