@@ -102,7 +102,7 @@ def part_1():
     print(f"Occupied count: {occupied_count}. Iterations: {iteration}")
 
 
-def get_first_adjacent_places(row: int, column: int, matrix):
+def get_directions(row: int, column: int, matrix):
     max_row_idx = len(matrix[0])
 
     directions = []
@@ -115,7 +115,7 @@ def get_first_adjacent_places(row: int, column: int, matrix):
     directions.append([(row + i, column - i) for i in range(1, max_row_idx)]) # diagonal_down_left
     directions.append([(row + i, column + i) for i in range(1, max_row_idx)]) # diagonal_down_right
 
-    adjacent_places = []
+    directions_list = []
     for direction in directions:
         temp_direction = []
         for position in direction:
@@ -126,9 +126,9 @@ def get_first_adjacent_places(row: int, column: int, matrix):
                 continue
             
             temp_direction.append(matrix[row_idx][column_idx])
-        adjacent_places.append(temp_direction)
+        directions_list.append(temp_direction)
 
-    return adjacent_places
+    return directions_list
 
 
 def part_2():
@@ -145,9 +145,9 @@ def part_2():
             new_row = []
             for column in range(columns):
                 place = matrix[row][column]
-                adjacent_places = get_first_adjacent_places(row, column, matrix)
+                directions = get_directions(row, column, matrix)
                 first_elements = []
-                for direction in adjacent_places:
+                for direction in directions:
                     for element in direction:
                         if element == FLOOR:
                             continue
@@ -194,6 +194,6 @@ def timeit():
 
 
 if __name__ == "__main__":
-    # part_1()
+    part_1()
     with timeit():
         part_2()
